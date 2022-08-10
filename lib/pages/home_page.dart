@@ -59,6 +59,33 @@ class _HomePageState extends State<HomePage> {
     for (var element in box.values) {
       debugPrint(element.toString());
     }
+    debugPrint("*************************");
+    //*? Tum verilerimizi direk map farmatinda yani key-value seklinde de yazdirabiliriz:
+    debugPrint(box.toMap().toString());
+    //todo: toMap metotu ile tum verilerimizi key value seklinde de alabiliriz ayni anda
+
+    //*get metotu:
+    debugPrint(box.get("tema")); //*key ile erisim
+    //todo: get metotu ile icine verdigimiz key e karsilik gelen degeri alabiliriz.
+    //!Not: get metodu ile key ile erisim saglariz
+
+    //*getAt metotu:
+
+    debugPrint(box.getAt(0)); //*index ile erisim
+    //todo: getAt ile de icine index degerimizi verirsek verimizin o indexe karsilik gelen degerine ulasabiliriz.
+    debugPrint("------Silme Islemleri-----");
+    //?Veri silme delete metodu:
+    await box.delete("tc"); //*key ile silme islemi
+    //todo: icine verdigimiz key degerindeki verimizi siler
+    debugPrint(box.toMap().toString());
+    //? deleteAt metodu:
+    await box.deleteAt(1); //* index ile silme islemi
+    debugPrint(box.toMap().toString());
+
+    debugPrint("------------Veri guncelleme --------");
+    //*Veri guncelleme islemi bu islemi de putAt ile yapabiliriz yapalim hemen:
+    await box.putAt(0, "Yeni Deger");
+    debugPrint(box.toMap().toString());
   }
 
   @override
