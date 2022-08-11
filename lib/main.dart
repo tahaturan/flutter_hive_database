@@ -12,6 +12,8 @@ Future<void> main() async {
   Hive.registerAdapter(GozRenkAdapter());
   await Hive.openBox<Ogrenci>("ogrenciler");
 
+  await Hive.openLazyBox<int>("sayilar");
+
   runApp(const MyApp());
 }
 

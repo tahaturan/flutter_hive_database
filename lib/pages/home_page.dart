@@ -105,6 +105,18 @@ class _HomePageState extends State<HomePage> {
     debugPrint(box.toMap().toString());
   }
 
+  void lazyAndEncrytedBox() async {
+    var sayilar = Hive.lazyBox<int>("sayilar");
+
+    for (var i = 0; i < 50; i++) {
+      await sayilar.add(i * 50);
+    }
+
+    for (var i = 0; i < 50; i++) {
+      debugPrint((await sayilar.getAt(i)).toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +138,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          customData();
+          lazyAndEncrytedBox();
         },
         child: const Icon(Icons.add),
       ),
