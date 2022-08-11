@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hive_database/model/ogrenci.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final int _counter = 0;
 
+  // ignore: unused_element
   Future<void> _incrementCounter() async {
     var box = Hive.box("test");
     //*ne zaman ki butina basioldiginda biz test kutumuzda islem yapicaz
@@ -88,6 +90,21 @@ class _HomePageState extends State<HomePage> {
     debugPrint(box.toMap().toString());
   }
 
+  void customData() async {
+    var taha = Ogrenci(5, "taha", GozRenk.SIYAH);
+    var hasan = Ogrenci(15, "hasan", GozRenk.YESIL);
+
+    var box = Hive.box<Ogrenci>("ogrenciler");
+    await box.clear();
+    box.add(taha);
+    box.add(hasan);
+    await box.clear();
+    box.put("taha", taha);
+    box.put("hasan", hasan);
+
+    debugPrint(box.toMap().toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +126,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _incrementCounter();
+          customData();
         },
         child: const Icon(Icons.add),
       ),
